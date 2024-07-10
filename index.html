@@ -4,20 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form and Table</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
+        .container {
             margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 id="title" class="mt-5">User Information Form</h1>
-        <p id="description">Please fill out the form below to submit your information. All fields are required.</p>
-        <form id="survey-form" class="survey-form">
+        <h1 id="title">Form and Table Example</h1>
+        <p id="description">This form collects information such as first name, last name, email, address, pincode, gender, choice of food, state, and country. On submission, the data is displayed in a table below.</p>
+
+        <form id="form">
             <div class="form-group">
-                <label id="name-label" for="first-name">First Name</label>
+                <label for="first-name">First Name</label>
                 <input type="text" class="form-control" id="first-name" placeholder="Enter your first name" required>
             </div>
             <div class="form-group">
@@ -25,49 +26,49 @@
                 <input type="text" class="form-control" id="last-name" placeholder="Enter your last name" required>
             </div>
             <div class="form-group">
-                <label id="email-label" for="email">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email address" required>
             </div>
             <div class="form-group">
                 <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" placeholder="Enter your address" required>
+                <textarea class="form-control" id="address" placeholder="Enter your address" required></textarea>
             </div>
             <div class="form-group">
                 <label for="pincode">Pincode</label>
                 <input type="text" class="form-control" id="pincode" placeholder="Enter your pincode" required>
             </div>
             <div class="form-group">
-                <label>Gender</label>
-                <div class="form-check">
+                <label>Gender</label><br>
+                <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="gender" id="male" value="Male" required>
                     <label class="form-check-label" for="male">Male</label>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gender" id="female" value="Female" required>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
                     <label class="form-check-label" for="female">Female</label>
                 </div>
             </div>
             <div class="form-group">
-                <label for="food">Choice of Food (select at least 2)</label>
+                <label>Choice of Food (Select at least 2)</label><br>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="food1" value="Pizza">
+                    <input class="form-check-input" type="checkbox" value="Pizza" id="food1">
                     <label class="form-check-label" for="food1">Pizza</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="food2" value="Burger">
+                    <input class="form-check-input" type="checkbox" value="Burger" id="food2">
                     <label class="form-check-label" for="food2">Burger</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="food3" value="Pasta">
+                    <input class="form-check-input" type="checkbox" value="Pasta" id="food3">
                     <label class="form-check-label" for="food3">Pasta</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="food4" value="Salad">
+                    <input class="form-check-input" type="checkbox" value="Salad" id="food4">
                     <label class="form-check-label" for="food4">Salad</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="food5" value="Ice Cream">
-                    <label class="form-check-label" for="food5">Ice Cream</label>
+                    <input class="form-check-input" type="checkbox" value="Sushi" id="food5">
+                    <label class="form-check-label" for="food5">Sushi</label>
                 </div>
             </div>
             <div class="form-group">
@@ -78,15 +79,11 @@
                 <label for="country">Country</label>
                 <input type="text" class="form-control" id="country" placeholder="Enter your country" required>
             </div>
-            <div class="form-group">
-                <label for="comments">Comments</label>
-                <textarea class="form-control" id="comments" rows="3" placeholder="Additional comments"></textarea>
-            </div>
             <button type="submit" class="btn btn-primary" id="submit">Submit</button>
         </form>
-
-        <h2 class="mt-5">Submitted Data</h2>
-        <table class="table table-striped">
+        
+        <h2>Table</h2>
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>First Name</th>
@@ -100,49 +97,49 @@
                     <th>Country</th>
                 </tr>
             </thead>
-            <tbody id="userTableBody">
+            <tbody id="data-table-body">
             </tbody>
         </table>
     </div>
 
     <script>
-        document.getElementById('survey-form').addEventListener('submit', function (e) {
-            e.preventDefault();
+        document.getElementById('form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            let firstName = document.getElementById('first-name').value;
+            let lastName = document.getElementById('last-name').value;
+            let email = document.getElementById('email').value;
+            let address = document.getElementById('address').value;
+            let pincode = document.getElementById('pincode').value;
+            let gender = document.querySelector('input[name="gender"]:checked').value;
 
-            const firstName = document.getElementById('first-name').value;
-            const lastName = document.getElementById('last-name').value;
-            const email = document.getElementById('email').value;
-            const address = document.getElementById('address').value;
-            const pincode = document.getElementById('pincode').value;
-            const gender = document.querySelector('input[name="gender"]:checked').value;
-            const foodChoices = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
-            const state = document.getElementById('state').value;
-            const country = document.getElementById('country').value;
-            const comments = document.getElementById('comments').value;
+            let foods = [];
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(function(food) {
+                foods.push(food.value);
+            });
 
-            if (foodChoices.length < 2) {
-                alert('Please select at least two food choices.');
+            if (foods.length < 2) {
+                alert('Please select at least two food items.');
                 return;
             }
 
-            const newRow = document.createElement('tr');
+            let state = document.getElementById('state').value;
+            let country = document.getElementById('country').value;
 
-            newRow.innerHTML = `
-                <td>${firstName}</td>
-                <td>${lastName}</td>
-                <td>${email}</td>
-                <td>${address}</td>
-                <td>${pincode}</td>
-                <td>${gender}</td>
-                <td>${foodChoices.join(', ')}</td>
-                <td>${state}</td>
-                <td>${country}</td>
-                <td>${comments}</td>
-            `;
+            let tableBody = document.getElementById('data-table-body');
+            let newRow = tableBody.insertRow();
 
-            document.getElementById('userTableBody').appendChild(newRow);
+            newRow.insertCell(0).textContent = firstName;
+            newRow.insertCell(1).textContent = lastName;
+            newRow.insertCell(2).textContent = email;
+            newRow.insertCell(3).textContent = address;
+            newRow.insertCell(4).textContent = pincode;
+            newRow.insertCell(5).textContent = gender;
+            newRow.insertCell(6).textContent = foods.join(', ');
+            newRow.insertCell(7).textContent = state;
+            newRow.insertCell(8).textContent = country;
 
-            document.getElementById('survey-form').reset();
+            document.getElementById('form').reset();
         });
     </script>
     <script src="https://app.zenclass.in/sheets/v1/js/zen/suite/bundle.js"></script>
